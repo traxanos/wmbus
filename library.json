@@ -1,0 +1,22 @@
+{
+  "name": "WMBus",
+  "version": "0.1.0",
+  "description": "Wireless M-Bus receiver library for CC1101 RF module. Supports T1/C1/S1 modes (C1 Frame A and Frame B) with AES-128-CBC (EN 13757-3 mode 5) and OMS Security Mode 7 decryption.",
+  "keywords": ["wmbus", "wireless m-bus", "CC1101", "metering", "EN13757", "water meter"],
+  "authors": {
+    "name": "marco.scholl",
+    "email": "claude@marco-scholl.de"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/traxanos/wmbus.git"
+  },
+  "homepage": "https://github.com/traxanos/wmbus",
+  "export": {
+    "include": "src"
+  },
+  "examples": "examples",
+  "frameworks": "arduino",
+  "platforms": "*",
+  "license": "MIT"
+}
