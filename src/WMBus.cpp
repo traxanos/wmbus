@@ -602,6 +602,22 @@ void Receiver::processRawFrame(const uint8_t* raw, uint16_t rawLen,
         snprintf(buf, sizeof(buf), "  Payload: Records=%u Status=%s", recordCount,
             (frame.decrypted() || !frame.encrypted()) ? "OK" : "DECRYPT-FAILED");
         _logCb(buf);
+        for (uint8_t i = 0; i < recordCount; i++) {
+            const DataRecord& r = records[i];
+            char rbuf[80];
+            if (r.quantity == Quantity::Date || r.quantity == Quantity::DateTime) {
+                snprintf(rbuf, sizeof(rbuf),
+                    "  [%2u] DIF=%02X VIF=%02X %-22s st%u %04u-%02u-%02u",
+                    i, r.dif, r.vif, r.quantityStr(), r.storage,
+                    r.year, r.month, r.day);
+            } else {
+                snprintf(rbuf, sizeof(rbuf),
+                    "  [%2u] DIF=%02X VIF=%02X %-22s st%u %s -> %g %s",
+                    i, r.dif, r.vif, r.quantityStr(), r.storage,
+                    r.functionStr(), (double)r.value(), r.unitStr());
+            }
+            _logCb(rbuf);
+        }
         hexDump();
     }
 
